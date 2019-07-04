@@ -4,6 +4,7 @@ path = "C:/Users/amykr/Documents/GitHub/Purchase-Analytics"#set your directory h
 #import products.csv from folder
 with open(path+'/input/products.csv','r') as f:
 	products = []
+	next(f)  # skip the first line in the headers
 	for line in f:
 		words = line.split(',')
 		products.append((words[0],words[1:]))
@@ -12,6 +13,7 @@ with open(path+'/input/products.csv','r') as f:
 #import order_products.csv from folder
 with open(path+'/input/order_products.csv','r') as f:
 	order_products = []
+	next(f)  # skip the first line in the headers
 	for line in f:
 		words = line.split(',')
 		order_products.append((words[0],words[1:]))
@@ -21,7 +23,7 @@ with open(path+'/input/order_products.csv','r') as f:
 merge = []#create new object
 for product in products:
 	for order in order_products: 
-		print order[1][0]
+		#print order[1][0]
 		if product[0] == order[1][0]:
 			merge.append((product[1][2],order[1][2],order[1][0])) 
 
@@ -40,14 +42,22 @@ for row in merge:
 #		if not row[0] in report[0][0]:
 			if row[0]==col[0]:
 				number_of_orders = number_of_orders +1
-			print col[1]
-			if col[1].rstrip()=="0":
-				print "hola"
-				number_of_first_orders = number_of_first_orders +1
+				print "dept " + row[0]
+				print "orders " + str(number_of_orders)
+				print "reorder " + col[1]
+				if str(col[1].rstrip())=="0":
+					number_of_first_orders = number_of_first_orders +1
+					print "number_of_first_orders " + str(number_of_first_orders)
+					print "reoroder " + col[1]
 	report.append((row[0],number_of_orders,number_of_first_orders)) 
 	number_of_orders =0
 	number_of_first_orders =0
-	print row[0]
-	merge.remove(row)
-print report
 
+print list(set(report))#print report without duplicate rows
+
+for col in list(set(report)):
+	if not str(col[1])=='0':
+		print "dept = " + str(col[0])
+		print "orders = " + str(col[1])
+		print "first orders = " + str(col[2])
+		print "percentage = "+ str(float((col[2]*1.0)/(col[1]*1.0)))
