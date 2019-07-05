@@ -25,7 +25,6 @@ with open(path+'/input/order_products.csv','r') as f:#import order_products.csv 
 	next(f)   #skip the first line with the headers
 	for line in f:#loop over rows in orders
 		column = line.strip().split(',')#comma delimited file. Return string without leading and trailing characters
-#		if dept_orders[0] in products[column[3]]:#if at least one order of product in department ## not working
 		if products[column[1]] in dept_orders:#if already in dept orders object, modify object
 			dept_orders[products[column[1]]]["orders"] += 1;#increase value of orders by 1
 			dept_orders[products[column[1]]]["reordered"] += int(column[3]);#increase value of reorder by 1
@@ -36,6 +35,7 @@ with open(path+'/input/order_products.csv','r') as f:#import order_products.csv 
 			}
 
 #create report of number of product orders, number of first orders, and proportion of two.
+#with open(path+'/insight_testsuite/tests/test_2/output/report.csv','w') as f:#test report with full databases.
 with open(path+'/output/report.csv','w') as f:#import order_products.csv from folder
 	f.write("department_id, number_of_orders, number_of_first_orders, percentage \n")#add header to csv file.
 	for dept in sorted(dept_orders):#sort ascending 

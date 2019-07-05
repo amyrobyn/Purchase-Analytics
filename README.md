@@ -9,7 +9,9 @@
 
 #notes to run
 1. Replace the variable path for your local repository root path
-2. Both the example and test data paths are given but only example data is run and test data is commented out. 
+2. to run test_2, data must be downloaded from #data: https://www.instacart.com/datasets/grocery-shopping-2017
+#data dictionary: https://gist.github.com/jeremystan/c3b39d947d9b88b3ccff3147dbcf6c6b
+
    	
 #Questions, email Amy Krystosik at akrystos@stanford.edu
 #Author: Amy R Krystosik
