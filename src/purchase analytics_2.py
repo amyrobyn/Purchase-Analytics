@@ -12,15 +12,16 @@ products = {}#create empty dictionary object for products
 dept_orders = {}#create empty dictionary object for orders
 
 #read products file and create map products to department
-#with open(path+'/insight_testsuite/tests/test_1/input/products.csv','r') as f:#import order_products.csv from folder
-with open(path+'/input/products.csv','r') as f:#import products.csv from folder
+#with open(path+'/insight_testsuite/tests/test_2/input/products.csv','r') as f:#test with full data order_products.csv
+with open(path+'/input/products.csv','r') as f:#import order_products.csv from folder
 	next(f)  # skip the first line in the headers
 	for line in f:#loop over rows in products
 		column = line.strip().split(",")#comma delimited file. Return string without leading and trailing characters 
 		products[column[PROD_ID]] = int(column[DEPT_ID])#look up product id to map to department id
+
 #read order file and create map of orders to department and count of orders and reorders
-#with open(path+'/insight_testsuite/tests/test_1/input/order_products.csv','r') as f:#import order_products.csv from folder
-with open(path+'/input/order_products__prior.csv','r') as f:#import order_products.csv from folder
+#with open(path+'/insight_testsuite/tests/test_2/input/order_products__prior.csv','r') as f:#test with full data order_products.csv
+with open(path+'/input/order_products.csv','r') as f:#import order_products.csv from folder
 	next(f)   #skip the first line with the headers
 	for line in f:#loop over rows in orders
 		column = line.strip().split(',')#comma delimited file. Return string without leading and trailing characters
@@ -36,7 +37,7 @@ with open(path+'/input/order_products__prior.csv','r') as f:#import order_produc
 
 #create report of number of product orders, number of first orders, and proportion of two.
 with open(path+'/output/report.csv','w') as f:#import order_products.csv from folder
-	f.write("department_id, number_of_orders, number_of_first_orders, percentage \n")
+	f.write("department_id, number_of_orders, number_of_first_orders, percentage \n")#add header to csv file.
 	for dept in sorted(dept_orders):#sort ascending 
 		f.write ("%s , %d , %d , %10.2f \n" 
 			%(
@@ -44,6 +45,5 @@ with open(path+'/output/report.csv','w') as f:#import order_products.csv from fo
 				dept_orders[dept]["orders"], 
 				dept_orders[dept]["orders"] - dept_orders[dept]["reordered"],
 				(dept_orders[dept]["orders"] - dept_orders[dept]["reordered"]) / (dept_orders[dept]["orders"] * 1.0)
-
 			)
 		)
