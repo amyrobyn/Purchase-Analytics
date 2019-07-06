@@ -36,9 +36,9 @@ with open('./input/order_products.csv','r') as f:#import order_products.csv from
 #create report of number of product orders, number of first orders, and proportion of two.
 #with open(path+'/insight_testsuite/tests/test_2/output/report.csv','w') as f:#test report with full databases.
 with open('./output/report.csv','w') as f:#import order_products.csv from folder
-	f.write("department_id, number_of_orders, number_of_first_orders, percentage \n")#add header to csv file.
+	f.write("department_id,number_of_orders,number_of_first_orders,percentage \n")#add header to csv file.
 	for dept in sorted(dept_orders):#sort ascending 
-		f.write ("%s , %d , %d , %10.2f \n" 
+		f.write ("%d , %d , %d , %10.2f \n" 
 			%(
 				dept,
 				dept_orders[dept]["orders"], 
