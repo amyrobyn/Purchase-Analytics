@@ -9,8 +9,10 @@
 
 #notes to run
 1. Replace the variable path for your local repository root path
+
 2. to run test_2, data must be downloaded from #data: https://www.instacart.com/datasets/grocery-shopping-2017
-#data dictionary: https://gist.github.com/jeremystan/c3b39d947d9b88b3ccff3147dbcf6c6b
+#data dictionary: https://gist.github.com/jeremystan/c3b39d947d9b88b3ccff3147dbcf6c6b . the data must be called directly from the source file. 
+note, using sys import in python, the input for example and test data could be called automatically.
 
    	
 #Questions, email Amy Krystosik at akrystos@stanford.edu

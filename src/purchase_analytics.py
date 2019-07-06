@@ -9,10 +9,13 @@ PROD_ID=0#product id is collumn 0 in products.csv
 DEPT_ID= -1 #dept id is last collumn in products.csv #number of columns varies since commas in column 2 so column 3 is not always the dept id. csv reader has escape tactics to deal with this type of problem withour writing a csv reader with escape.
 products = {}#create empty dictionary object for products
 dept_orders = {}#create empty dictionary object for orders
+order_file = './input/order_products.csv'#read from input folder. could specify in run.sh with import sys
+product_file = './input/products.csv'#read from input folder. could specify in run.sh with import sys
+report_file = './output/report.csv'#write to output folder. could specify in run.sh with import sys
 
 #read products file and create map products to department
 #with open(path+'/insight_testsuite/tests/test_2/input/products.csv','r') as f:#test with full data order_products.csv
-with open('./input/products.csv','r') as f:#import order_products.csv from folder
+with open(product_file,'r') as f:#import order_products.csv from folder
 	next(f)  # skip the first line in the headers
 	for line in f:#loop over rows in products
 		column = line.strip().split(",")#comma delimited file. Return string without leading and trailing characters 
@@ -20,7 +23,7 @@ with open('./input/products.csv','r') as f:#import order_products.csv from folde
 
 #read order file and create map of orders to department and count of orders and reorders
 #with open(path+'/insight_testsuite/tests/test_2/input/order_products__prior.csv','r') as f:#test with full data order_products.csv
-with open('./input/order_products.csv','r') as f:#import order_products.csv from folder
+with open(order_file,'r') as f:#import order_products.csv from folder
 	next(f)   #skip the first line with the headers
 	for line in f:#loop over rows in orders
 		column = line.strip().split(',')#comma delimited file. Return string without leading and trailing characters
@@ -35,7 +38,7 @@ with open('./input/order_products.csv','r') as f:#import order_products.csv from
 
 #create report of number of product orders, number of first orders, and proportion of two.
 #with open(path+'/insight_testsuite/tests/test_2/output/report.csv','w') as f:#test report with full databases.
-with open('./output/report.csv','w') as f:#import order_products.csv from folder
+with open(report_file,'w') as f:#import order_products.csv from folder
 	f.write("department_id,number_of_orders,number_of_first_orders,percentage\n")#add header to csv file.
 	for dept in sorted(dept_orders):#sort ascending 
 		f.write ("%d , %d , %d , %10.2f \n" 
